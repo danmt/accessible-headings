@@ -5,60 +5,92 @@
 <main>
   <section>
     <header>
-      <app-heading text="Heading 2"></app-heading>
+      <app-heading headingId="child-1" text="Heading 2"></app-heading>
     </header>
 
     <article>
       <header>
-        <app-heading text="Heading 3"></app-heading>
+        <app-heading
+          headingId="child-1-1"
+          parentHeadingId="child-1"
+          text="Heading 3"
+        ></app-heading>
       </header>
     </article>
 
     <article>
       <header>
-        <app-heading text="Heading 3"></app-heading>
+        <app-heading
+          headingId="child-1-2"
+          parentHeadingId="child-1"
+          text="Heading 3"
+        ></app-heading>
       </header>
     </article>
   </section>
 
   <section>
     <header>
-      <app-heading text="Heading 2"></app-heading>
+      <app-heading headingId="child-2" text="Heading 2"></app-heading>
     </header>
 
     <article>
       <header>
-        <app-heading text="Heading 3"></app-heading>
+        <app-heading
+          headingId="child-2-1"
+          parentHeadingId="child-2"
+          text="Heading 3"
+        ></app-heading>
       </header>
 
       <div>
         <header>
-          <app-heading text="Heading 4"></app-heading>
+          <app-heading
+            headingId="child-2-1-1"
+            parentHeadingId="child-2-1"
+            text="Heading 4"
+          ></app-heading>
         </header>
 
         <div>
           <header>
-            <app-heading text="Heading 5"></app-heading>
+            <app-heading
+              headingId="child-2-1-1-1"
+              parentHeadingId="child-2-1-1"
+              text="Heading 5"
+            ></app-heading>
           </header>
         </div>
 
         <div>
           <header>
-            <app-heading text="Heading 5"></app-heading>
+            <app-heading
+              headingId="child-2-1-1-2"
+              parentHeadingId="child-2-1-1"
+              text="Heading 5"
+            ></app-heading>
           </header>
         </div>
       </div>
 
       <div>
         <header>
-          <app-heading text="Heading 4"></app-heading>
+          <app-heading
+            headingId="child-2-1-2"
+            parentHeadingId="child-2-1"
+            text="Heading 4"
+          ></app-heading>
         </header>
       </div>
     </article>
 
     <article>
       <header>
-        <app-heading text="Heading 3"></app-heading>
+        <app-heading
+          headingId="child-2-2"
+          parentHeadingId="child-2"
+          text="Heading 3"
+        ></app-heading>
       </header>
     </article>
   </section>

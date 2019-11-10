@@ -76,22 +76,84 @@ I wasnt authorized to create more components because that meant making maintaina
 I started by creating a simple component I named HeadingComponent that looks like this.
 
 ```typescript
-import { Component, Input } from '@angular/core';
-
 @Component({
   selector: 'app-heading',
-  templateUrl: './heading.component.html',
-  styleUrls: ['./heading.component.scss']
+  template: `
+    <span
+      appHeading
+      [headingId]="headingId"
+      [parentHeadingId]="parentHeadingId"
+      [text]="text"
+    ></span>
+  `
 })
 export class HeadingComponent {
+  @Input() headingId: string;
+  @Input() parentHeadingId: string;
   @Input() text: string;
-  @Input() hierarchy: number;
 }
 ```
 
-This way consumers of this component can specify the content of the tag, and the hierarchy which can be a number from 1 to 6.
+The Heading Component can take input values:
 
-What if there's not a hierarchy? We'll need to infer it from the DOM.
+- HeadingId: Identifier that allows querying the DOM to find an specific heading.
+- ParentHeadingId: Identifier that allows querying the DOM to find an specific heading, its the headingId of the parent heading.
+- Text: The text content that will be displayed inside the heading tag.
+
+As you can see I used an inline template because we only use a single HTML element. I created this component because I didnt want users to attach it directly them to the span. In my opinion it looks more self explanatory this way.
+
+In order to do DOM manipulations, Angular Docs state that you should use directives. So let's create a directive that introduces the heading inside our component with the right hierarchy.
+
+```typescript
+import { Directive, ElementRef, AfterViewInit, Input } from '@angular/core';
+
+@Directive({
+  selector: '[appHeading]'
+})
+export class HeadingDirective implements AfterViewInit {
+  @Input() headingId: string;
+  @Input() text: string;
+  @Input() parentHeadingId: string;
+
+  constructor(private el: ElementRef) {}
+
+  ngAfterViewInit() {
+    this.el.nativeElement.innerHTML = this.wrapText(
+      this.headingId || 'root',
+      this.getTag(this.getHierarchy(this.headingId, this.parentHeadingId)),
+      this.text
+    );
+  }
+
+  private getHierarchy(headingId: string, parentHeadingId: string) {
+    if (!headingId) {
+      return 1;
+    } else if (!parentHeadingId) {
+      return 2;
+    } else {
+      const parentHeading = document.querySelector(`#${parentHeadingId}`);
+      const parentHierarchy = parseInt(parentHeading.tagName[1], 10);
+      return parentHierarchy === 6 ? 6 : parentHierarchy + 1;
+    }
+  }
+
+  private getTag(hierarchy: number) {
+    return `h${hierarchy}`;
+  }
+
+  private wrapText(id: string, tag: string, text: string) {
+    return `<${tag} id=${id}>${text}</${tag}>`;
+  }
+}
+```
+
+The Heading Directive has multiple methods to get the job done:
+
+- getTag: Given a hierarchy it returns the proper heading tag.
+- wrapText: Given an id, tag and text, it creates the html tag for the heading.
+- getHierarchy: Given a headingId and a parentId, it infers the hierarchy of the current element.
+
+And that's it. If you want to go ahead and take a look at this working, you can [take a look at this repository](/) to see it in action. In there repo there are multiple samples showing how it works.
 
 ## Conclusion
 
