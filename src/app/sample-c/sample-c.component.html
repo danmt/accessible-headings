@@ -1,23 +1,29 @@
 <header>
-  <app-heading text="Heading 1"></app-heading>
+  <app-heading headingId="root" text="Heading 1"></app-heading>
 </header>
 
 <main>
   <section>
-    <app-sample-d text="Heading 2"></app-sample-d>
+    <app-sample-d headingId="child-1" parentHeadingId="root"></app-sample-d>
 
     <section>
-      <app-sample-d text="Heading 3"></app-sample-d>
+      <app-sample-d
+        headingId="child-1-1"
+        parentHeadingId="child-1"
+      ></app-sample-d>
     </section>
   </section>
 
   <section>
     <header>
-      <app-sample-d text="Heading 2"></app-sample-d>
+      <app-sample-d headingId="child-2" parentHeadingId="root"></app-sample-d>
     </header>
 
     <section>
-      <app-sample-d text="Heading 3"></app-sample-d>
+      <app-sample-d
+        headingId="child-2-1"
+        parentHeadingId="child-2"
+      ></app-sample-d>
     </section>
   </section>
 </main>
