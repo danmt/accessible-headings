@@ -1,0 +1,30 @@
+:host {
+  display: block;
+}
+
+header {
+  background-color: darken(white, 10);
+  margin: 0;
+  padding: 0.5rem;
+}
+
+ul {
+  display: flex;
+
+  li {
+    margin: 0.5rem;
+    list-style-type: none;
+
+    a {
+      text-decoration: none;
+      padding: 0.1rem;
+
+      &.active,
+      &:active,
+      &:hover,
+      &:focus {
+        text-decoration: underline;
+      }
+    }
+  }
+}
