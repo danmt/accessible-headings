@@ -2,7 +2,14 @@ import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-heading',
-  templateUrl: './heading.component.html'
+  template: `
+    <span
+      appHeading
+      [headingId]="headingId"
+      [parentHeadingId]="parentHeadingId"
+      [text]="text"
+    ></span>
+  `
 })
 export class HeadingComponent {
   @Input() headingId: string;
