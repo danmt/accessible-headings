@@ -12,15 +12,17 @@ export class HeadingDirective implements AfterViewInit {
 
   ngAfterViewInit() {
     this.el.nativeElement.innerHTML = this.wrapText(
-      this.headingId,
-      this.getTag(this.getHierarchy(this.parentHeadingId)),
+      this.headingId || 'root',
+      this.getTag(this.getHierarchy(this.headingId, this.parentHeadingId)),
       this.text
     );
   }
 
-  private getHierarchy(parentHeadingId: string) {
-    if (!parentHeadingId) {
+  private getHierarchy(headingId: string, parentHeadingId: string) {
+    if (!headingId) {
       return 1;
+    } else if (!parentHeadingId) {
+      return 2;
     } else {
       const parentHeading = document.querySelector(`#${parentHeadingId}`);
       const parentHierarchy = parseInt(parentHeading.tagName[1], 10);
