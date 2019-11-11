@@ -3,12 +3,12 @@ import { Component, Input } from '@angular/core';
 @Component({
   selector: 'app-heading',
   template: `
-    <span
+    <div
       appHeading
       [headingId]="headingId"
       [parentHeadingId]="parentHeadingId"
       [text]="text"
-    ></span>
+    ></div>
   `
 })
 export class HeadingComponent {
