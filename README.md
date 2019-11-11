@@ -46,8 +46,6 @@ Imagine that you can't rely on colors, sizes, borders, etc... To denote relation
 
 Headings are a way to denote relationships or even better, _groupings_. I like to think of it as _trees_.
 
-> Yeah, I'm a geek.
-
 Well, anyway. Imagine the first `<h1>` is the root node of our application, just like trees there's a single root node. All the consequent `<h2>` are treated as children of the root or `<h1>`.
 
 Now comes the tricky part, suppose you are writing content right below one of the `<h2>`'s and you want to create a new heading. There are two possible scenarios.
@@ -57,11 +55,13 @@ Now comes the tricky part, suppose you are writing content right below one of th
 - You want the heading to be a children of one of the `<h2>`.
 - Solution: Use `<h3>`.
 
+![Visual representation of NVDA elements tree](https://thepracticaldev.s3.amazonaws.com/i/qfz2xc5kp4jq3u6y9z70.png)
+
 By know you should understand the idea. But there's one new problem, what about reusable components?
 
 ### Reusable components
 
-After realizing that we had no headings, I rushed to the project leader and tell him about it. We agreed that it was one of our main concerns now and that we had to do something. I said, ``Don't worry sir, I'll get it done.
+After realizing that we had no headings, I rushed to the project leader and tell him about it. We agreed that it was one of our main concerns now and that we had to do something. I said, Don't worry sir, I'll get it done.
 
 Some days later, I noticed that for same cases it was straightforward but suddenly I entered a danger zone. We had reusable components being used at different hierarchical levels and it was impossible to just pick one heading level.
 
