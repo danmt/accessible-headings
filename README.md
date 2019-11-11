@@ -2,13 +2,13 @@
 
 ## Intro
 
-Everyday accessibility gets more awareness, a few weeks back I was a total ignorant about it. I was assigned to a project looking forward to improve their overall accessibility looking to comply with WCAG 2.1 on the category AA. This was an incredible challenge and I had to learn a lot with a deadline on front of me.
+Everyday accessibility gets more awareness, a few weeks back I was a total ignorant about it. I was assigned to a project looking forward to improve their overall accessibility looking to comply with [WCAG 2.1](https://www.w3.org/TR/WCAG21/) on the category AA. This was an incredible challenge and I had to learn a lot with a deadline in front of me.
 
-My intention with this article aswell as all the others from _Make it accessible_ is to walk you through the challenges I faced. This project was in Angular, so I'll be going through accessibility from the point of view of an Angular Developer. All the knowledge found here can be easily applicable to other javascript frameworks, the best way to improve accessibility is to _use semantic HTML_.
+My intention with this article as well as all the others from _Make it accessible_ is to walk you through the challenges I faced. This project was in Angular, so I'll be going through accessibility from the point of view of an Angular Developer. All the knowledge found here can be easily applicable to other javascript frameworks, the best way to improve accessibility is to _use semantic HTML_.
 
-For this article I decided to focus on Headings, they are one of the key mechanisms to help visually impaired users. At the beginning on my a11y journey, I had to make a first diagnose of the status of the application when used with a screen reader. After installing NVDA, since I already knew how the application behaves I was able to go through the main flow of it **blindfolded**.
+For this article I decided to focus on Headings, they are one of the key mechanisms to help visually impaired users. At the beginning of my a11y journey, I had to make a first diagnosis of the status of the application when used with a screen reader. After installing [NVDA](https://www.nvaccess.org/), since I already knew how the application behaves I was able to go through the main flow of it **blindfolded**.
 
-Yeah, blindfolded while in a call with the project leader. It was a bold move, even though it worked out. It was a false positive, if I didnt know the app on first hand I would have been impossible to achieve it. After a long call, we decided that in order for us to continue we needed to know how do blind users actually use the screen readers.
+Yeah, blindfolded while in a call with the project leader. It was a bold move, even though it worked out. It was a false positive, if I didn't know the app on first hand I would have been impossible to achieve it. After a long call, we decided that in order for us to continue, we needed to know how do blind users actually use the screen readers.
 
 After digging up, I found some really good resources to help developers understand how blind people use applications. At the end of the article I have the links to the videos. It turns out that for these users, the headings are **key**. Before we continue, let's define a heading.
 
@@ -24,54 +24,54 @@ Although I was partly right, it wasn't its **only** purpose. If you take a look 
 > Headings communicate the organization of the content on the page. Web browsers, plug-ins, and assistive technologies can use them to provide in-page navigation.
 > w3c Organization - WAI ARIA.
 
-You maybe have now more questions than answers, but that's okey we are gonna get there. It turns out that headings have two main roles, the one I already mention and secondly, allowing AT users in-page navigation.
+You maybe have now more questions than answers, but that's okay because we are gonna get there. It turns out that headings have two main roles, the one I already mentioned and secondly, allowing [AT](https://en.wikipedia.org/wiki/Assistive_technology) users in-page navigation.
 
 ### Screen Readers
 
-In the previous section I mentioned the fact that headings provide AT users with in-page navigation. Let's dive a bit on that, it turns out that when blind users are navigating they rely in the screen reader functionalities and there's one in all the major products that allow users to see all headings and jump directly to them.
+In the previous section I mentioned the fact that headings provide [AT](https://en.wikipedia.org/wiki/Assistive_technology) users with in-page navigation. Let's dive a bit on that, it turns out that when blind users are navigating they rely on the screen reader functionalities and there's one in all the major products that allow users to see all headings and jump directly to them.
 
-I started wondering, is this really how people use this? It made no sense to me, but after searching a lot I found videos of blind users using the common sites we all know, Twitter, Gmail, etc... And guess what, its very common to see users rely on the navigation tool provided in their screen reader of choice.
+I started wondering, is this really how people use this? It made no sense to me, but after searching a lot I found videos of blind users using the common sites we all know, Twitter, Gmail, etc... And guess what, it's very common to see users rely on the navigation tool provided in their screen reader of choice.
 
-I decided it was time to give my project a second chance and use the navigation tool from NVDA. But it turns out that someone decided that `<span>` tags were more appropiate for headings and when I opened it, the heading list was empty. Screen readers cannot infer that by themselves, thats why you have to use HTML.
+I decided it was time to give my project a second chance and use the navigation tool from [NVDA](https://www.nvaccess.org/). But it turns out that someone decided that `<span>` tags were more appropriate for headings and when I opened it, the heading list was empty. Screen readers cannot infer that by themselves, that's why you have to use HTML.
 
 Believe it or not, here I go again: _Use semantic HTML_.
 
 By doing so, assistive technology users will be capable of using your apps. Or at least reading and understanding them.
 
-NOTE: Blind users know how to use screen readers, they tend to create a mental map of the application by going through the headings. If you don't provide the basic tools, you are priving them of using your app.
+NOTE: Blind users know how to use screen readers, they tend to create a mental map of the application by going through the headings. If you don't provide the basic tools, you are depriving them of using your app.
 
-## Proper headings
+### Proper headings
 
-Imagine that you cant rely in colors, sizes, borders, etc... To denote relationships between the parts of your app. You may think that will make the apps boring, but its the only way blind users have. They see apps in a very different way, we have to give them alternatives to know the relationships between the elements. This elements relationship is a whole topic by itself, I just want to mention it.
+Imagine that you can't rely on colors, sizes, borders, etc... To denote relationships between the parts of your app. You may think that will make the apps boring, but it's the only way blind users have. They see apps in a very different way, we have to give them alternatives to know the relationships between the elements. This elements relationship is a whole topic by itself, I just want to mention it.
 
 Headings are a way to denote relationships or even better, _groupings_. I like to think of it as _trees_.
 
-> Yeah, Im a geek.
+> Yeah, I'm a geek.
 
 Well, anyway. Imagine the first `<h1>` is the root node of our application, just like trees there's a single root node. All the consequent `<h2>` are treated as children of the root or `<h1>`.
 
 Now comes the tricky part, suppose you are writing content right below one of the `<h2>`'s and you want to create a new heading. There are two possible scenarios.
 
-- You want the heading to be a children of the root.
-  - Solution: Use `<h2>`.
+- You want the heading to be children of the root.
+- Solution: Use `<h2>`.
 - You want the heading to be a children of one of the `<h2>`.
-  - Solution: Use `<h3>`.
+- Solution: Use `<h3>`.
 
 By know you should understand the idea. But there's one new problem, what about reusable components?
 
-## Reusable components
+### Reusable components
 
-After realizing that we had no headings, I rushed to the project leader and tell him about it. We agreed that it was one of our main concerns now and that we had to do something. I said, dont worry sir, I'll get it done.
+After realizing that we had no headings, I rushed to the project leader and tell him about it. We agreed that it was one of our main concerns now and that we had to do something. I said, ``Don't worry sir, I'll get it done.
 
 Some days later, I noticed that for same cases it was straightforward but suddenly I entered a danger zone. We had reusable components being used at different hierarchical levels and it was impossible to just pick one heading level.
 
 NOTE: If you design your application having accessibility as a first class citizen, you can easily avoid this situation by creating the right components from the beginning.
 
-I wasnt authorized to create more components because that meant making maintainability harder. So I had a new task ahead, creating a component that could by itself know which heading use according to the place where its being placed in the DOM.
+I wasn't authorized to create more components because that meant making maintainability harder. So I had a new task ahead, creating a component that could by itself know which heading use according to the place where its being placed in the [DOM](https://en.wikipedia.org/wiki/Document_Object_Model).
 
 > I highly encourage you to avoid this and instead to redesign from the ground up having in mind accessibility for all the design decisions.
 
-### Solution
+#### Solution
 
 I started by creating a simple component I named HeadingComponent that looks like this.
 
@@ -96,13 +96,13 @@ export class HeadingComponent {
 
 The Heading Component can take input values:
 
-- HeadingId: Identifier that allows querying the DOM to find an specific heading.
-- ParentHeadingId: Identifier that allows querying the DOM to find an specific heading, its the headingId of the parent heading.
+- HeadingId: Identifier that allows querying the [DOM](https://en.wikipedia.org/wiki/Document_Object_Model) to find a specific heading.
+- ParentHeadingId: Identifier that allows querying the [DOM](https://en.wikipedia.org/wiki/Document_Object_Model) to find a specific heading, it's the headingId of the parent heading.
 - Text: The text content that will be displayed inside the heading tag.
 
-As you can see I used an inline template because we only use a single HTML element. I created this component because I didnt want users to attach it directly them to the span. In my opinion it looks more self explanatory this way.
+As you can see I used an inline template because we only use a single HTML element. I created this component because I didn't want users to attach it directly them to the span. In my opinion it looks more self explanatory this way.
 
-In order to do DOM manipulations, Angular Docs state that you should use directives. So let's create a directive that introduces the heading inside our component with the right hierarchy.
+In order to do [DOM](https://en.wikipedia.org/wiki/Document_Object_Model) manipulations, Angular Docs state that you should use directives. So let's create a directive that introduces the heading inside our component with the right hierarchy.
 
 ```typescript
 import { Directive, ElementRef, AfterViewInit, Input } from '@angular/core';
@@ -151,9 +151,9 @@ The Heading Directive has multiple methods to get the job done:
 
 - getTag: Given a hierarchy it returns the proper heading tag.
 - wrapText: Given an id, tag and text, it creates the html tag for the heading.
-- getHierarchy: Given a headingId and a parentId, it infers the hierarchy of the current element.
+- getHierarchy: Given a headingId and parentId, it infers the hierarchy of the current element.
 
-And that's it. If you want to go ahead and take a look at this working, you can [take a look at this repository](/) to see it in action. In there repo there are multiple samples showing how it works.
+And that's it. If you want to go ahead and take a look at this working, you can [take a look at this repository](https://github.com/danmt/accessible-headings) to see it in action. In their repo there are multiple samples showing how it works.
 
 ## Conclusion
 
