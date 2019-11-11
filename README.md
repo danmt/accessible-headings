@@ -79,12 +79,12 @@ I started by creating a simple component I named HeadingComponent that looks lik
 @Component({
   selector: 'app-heading',
   template: `
-    <span
+    <div
       appHeading
       [headingId]="headingId"
       [parentHeadingId]="parentHeadingId"
       [text]="text"
-    ></span>
+    ></div>
   `
 })
 export class HeadingComponent {
